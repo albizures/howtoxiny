@@ -1,0 +1,23 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	@apply bg-base-100;
+}
+
+.line {
+}
+
+.number-line {
+	@apply bg-base-300 px-3 py-1 inline-block mr-2 text-gray-600;
+}
+
+.line:first-child .number-line {
+	@apply pt-3;
+}
+
+.line:last-child .number-line {
+	@apply pb-3;
+}
