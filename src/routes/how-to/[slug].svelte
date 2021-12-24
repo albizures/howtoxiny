@@ -67,7 +67,7 @@
 
 <div
 	on:mousewheel={onScroll}
-	class="languages overflow-y-auto pl-44 pb-4">
+	class="languages overflow-y-auto lg:pl-44 pb-4">
 	{#each languages as lang (lang)}
 		<div class="lang px-2 py-3">
 			<h4 class="lang-title">{lang}</h4>

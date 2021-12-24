@@ -20,10 +20,10 @@
 </script>
 
 <main
-	class="bg-base-100 max-w-md mx-auto mt-20 flex flex-col justify-center align-middle">
+	class="bg-base-100 max-w-md mx-auto mt-20 px-4 flex flex-col justify-center align-middle">
 	<h1
 		class="text-5xl text-primary text-center font-serif font-bold mb-4">
-		How to do <span
+		How to do <br /><span
 			class="border border-secondary text-secondary inline-block px-2"
 			>X</span>
 		in
