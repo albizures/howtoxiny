@@ -6,7 +6,7 @@
 	import { createCollection, highlight } from '../../utils';
 
 	export const load: Load = async ({ page, fetch }) => {
-		const markdown = await fetch(`/${page.params.slug}.md`);
+		const markdown = await fetch(`/md/${page.params.slug}.md`);
 
 		const collection = createCollection(await markdown.text());
 		const languages = Object.keys(collection.snippets);

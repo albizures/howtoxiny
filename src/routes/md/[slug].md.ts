@@ -19,6 +19,4 @@ export const get: RequestHandler = async ({ params }) => {
 			error: new Error(`File not found: ${slug}`),
 		};
 	}
-
-	return;
 };
