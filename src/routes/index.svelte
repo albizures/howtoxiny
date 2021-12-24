@@ -4,9 +4,8 @@
 	import type { Load } from '@sveltejs/kit';
 
 	export const load: Load = async ({ fetch }) => {
-		const response = await fetch(`/md`);
+		const response = await fetch(`/api/collections/all`);
 		const collections = await response.json();
-		console.log(collections);
 
 		return {
 			props: {
@@ -18,8 +17,6 @@
 
 <script lang="ts">
 	export let collections: { name: string; title: string }[] = [];
-
-	console.log(collections);
 </script>
 
 <main
@@ -42,8 +39,7 @@
 	<h2 class="text-3xl text-center font-serif mt-6 text-primary">
 		List of Snippets
 	</h2>
-	<ul
-		class="list-[circle] marker:text-secondary max-w-xs mx-auto mt-3">
+	<ul class="list-disc marker:text-secondary max-w-xs mx-auto mt-3">
 		{#each collections as collection}
 			<li>
 				<a class="link link-hover" href={`/how-to/${collection.name}`}

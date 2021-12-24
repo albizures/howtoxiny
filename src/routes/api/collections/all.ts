@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import type { RequestHandler } from '@sveltejs/kit';
-import { createCollection } from '../../utils';
+import { createCollection } from '../../../utils';
 
 export const get: RequestHandler = async () => {
 	try {

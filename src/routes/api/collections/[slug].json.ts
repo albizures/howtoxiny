@@ -1,5 +1,7 @@
 import fs from 'node:fs/promises';
 import type { RequestHandler } from '@sveltejs/kit';
+import { createCollection } from '../../../utils';
+import { JSONString } from '@sveltejs/kit/types/helper';
 
 export const get: RequestHandler = async ({ params }) => {
 	const { slug } = params;
@@ -11,7 +13,9 @@ export const get: RequestHandler = async ({ params }) => {
 		);
 
 		return {
-			body: markdown,
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			body: createCollection(markdown) as JSONString,
 		};
 	} catch (error) {
 		return {

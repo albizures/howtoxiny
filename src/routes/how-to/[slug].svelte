@@ -3,12 +3,14 @@
 
 	import type { Load } from '@sveltejs/kit';
 	import type { SnipperCollection } from '../../types';
-	import { createCollection, highlight } from '../../utils';
+	import { highlight } from '../../utils';
 
 	export const load: Load = async ({ page, fetch }) => {
-		const markdown = await fetch(`/md/${page.params.slug}.md`);
+		const response = await fetch(
+			`/api/collections/${page.params.slug}.json`,
+		);
 
-		const collection = createCollection(await markdown.text());
+		const collection = await response.json();
 		const languages = Object.keys(collection.snippets);
 
 		return {
@@ -54,7 +56,7 @@
 			<span class="text-base inline-block mt-2 text-primary"
 				>in:
 				{#each languages as lang (lang)}
-					<span class="language-badge badge-secondary">
+					<span class="language-badge">
 						#{lang}
 					</span>
 				{/each}
@@ -89,7 +91,7 @@
 	}
 
 	.sample {
-		@apply card shadow-lg bg-neutral pr-2;
+		@apply rounded-2xl overflow-hidden shadow-lg bg-neutral pr-2;
 	}
 
 	.samples {
@@ -101,6 +103,6 @@
 	}
 
 	.language-badge {
-		@apply badge badge-outline inline-block ml-1 pb-5;
+		@apply border border-secondary text-secondary inline-block ml-1 px-2 text-sm rounded-xl;
 	}
 </style>
