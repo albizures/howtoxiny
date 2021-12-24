@@ -39,7 +39,8 @@
 	<h2 class="text-3xl text-center font-serif mt-6 text-primary">
 		List of Snippets
 	</h2>
-	<ul class="list-disc marker:text-secondary max-w-xs mx-auto mt-3">
+	<ul
+		class="list-disc marker:text-secondary md:max-w-xs mx-auto mt-3">
 		{#each collections as collection}
 			<li>
 				<a class="link link-hover" href={`/how-to/${collection.name}`}
