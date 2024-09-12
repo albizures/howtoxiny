@@ -1,0 +1,43 @@
+---
+
+import { getHowToDos, getHowToSnippets } from '../../content'
+import Page from '../../layout/Page.astro'
+import { map } from '../../map'
+
+
+const howTos = await getHowToDos()
+
+---
+<Page>
+	<ul>
+		{howTos.map((howTo) => {
+			const { data, slug } = howTo
+			const { title, description } = data
+			const collection = getHowToSnippets(howTo)
+
+			const url = `/how-to/${slug}`
+			return (
+				<li>
+					<h4>
+						<a href={url}>{title}</a>
+					</h4>
+					<p>
+						<a href={url}>
+							{description}
+						</a>
+					</p>
+					<ul class="list-none">
+						{map(collection, ([lang]) => {
+							return (
+								<li>
+									{lang}
+								</li>
+							)
+						})}
+					</ul>
+				</li>
+			)
+		})}
+	</ul>
+</Page>
+

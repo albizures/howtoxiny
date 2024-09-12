@@ -1,0 +1,52 @@
+---
+export type Props = {
+	title?: string
+}
+
+const { title = 'Lang Snippets' } = Astro.props
+---
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot>
+	</body>
+</html>
+
+
+
+<style is:global>
+	:root {
+		@apply bg-base-100;
+	}
+
+	pre.astro-code {
+		@apply pr-4
+	}
+
+	code {
+		counter-reset: step;
+		counter-increment: step 0;
+
+	}
+
+	code .line::before {
+		content: counter(step);
+		counter-increment: step;
+		@apply bg-base-300 px-3 py-1 inline-block mr-2 text-gray-600;
+	}
+
+	code .line:first-child::before {
+		@apply pt-3;
+	}
+
+	code .line:last-child::before {
+		@apply pb-3;
+	}
+
+</style>

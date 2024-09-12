@@ -1,0 +1,36 @@
+---
+import { getHowToSnippets, type HowToDo } from '../content'
+import { map } from '../map'
+
+export type Props = {
+	howToDo: HowToDo
+}
+
+const { howToDo } = Astro.props
+const { data, slug } = howToDo
+const { title, description } = data
+const collection = getHowToSnippets(howToDo)
+const href = `/how-to/${slug}`
+
+---
+<div>
+	<h4>
+		<a href={href}>
+			{title}
+		</a>
+	</h4>
+	<p>
+		<a href={href}>
+			{description}
+		</a>
+	</p>
+	<ul class="list-none flex gap-4">
+		{map(collection, ([lang]) => {
+			return (
+				<li>
+					{lang}
+				</li>
+			)
+		})}
+	</ul>
+</div>

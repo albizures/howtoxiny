@@ -1,4 +1,9 @@
-# Define a Function
+---
+title: Define a Function
+description: How to define a function in different programming languages.
+tags:
+- syntax
+---
 
 ```js
 function name() {
@@ -9,10 +14,8 @@ function name() {
 ```js
 const name = () => {
 	// body
-};
+}
 ```
-
-> some note
 
 ```python
 def name():

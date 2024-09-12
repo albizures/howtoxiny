@@ -1,0 +1,87 @@
+---
+import { Code } from 'astro/components'
+import { getHowToDos, getHowToSnippets, type HowToDo } from '../../../content'
+import Page from '../../../layout/Page.astro'
+import { map } from '../../../map'
+
+export type Props = {
+	howToDo: HowToDo
+}
+
+export async function getStaticPaths() {
+	const howToDos = await getHowToDos()
+
+	return howToDos.map((howToDo) => {
+		const { slug } = howToDo
+		return {
+			params: { slug },
+			props: { howToDo },
+		}
+	})
+}
+
+const { howToDo } = Astro.props
+const { data } = howToDo
+const { title } = data
+
+const collection = getHowToSnippets(howToDo)
+
+---
+<Page>
+	<div class="bg-base-200 p-4 pb-6">
+		<div class="max-w-xl mx-auto">
+			<h1>
+				<span class="text-base text-primary">How to</span>
+				<span class="text-3xl font-bold block">{title}</span>
+				<span class="text-base inline-block mt-2 text-primary">in:
+					{map(collection, ([lang]) => (
+						<span class="language-badge">
+							{lang}
+						</span>
+					))}
+				</span>
+			</h1>
+		</div>
+	</div>
+
+	<div class="languages overflow-y-auto lg:pl-44 pb-4">
+		{map(collection, ([lang, snippets]) => (
+			<div class="lang px-2 py-3">
+				<h4 class="lang-title">{lang}</h4>
+				<div class="samples">
+					{map(snippets, (snippet) => (
+						<div class="sample mb-2">
+							<Code lang="rust" code={snippet} />
+						</div>
+					))}
+				</div>
+			</div>
+		))}
+	</div>
+</Page>
+
+<style>
+	.lang-title {
+		@apply text-lg rounded-2xl text-center uppercase bg-neutral border-b border-base-100;
+	}
+
+	.sample {
+		@apply rounded-2xl overflow-hidden shadow-lg bg-neutral;
+	}
+
+	.samples {
+		@apply flex flex-col mt-3;
+	}
+
+	.languages {
+		@apply flex w-auto flex-nowrap flex-row mt-4 pt-4;
+	}
+
+	.language-badge {
+		@apply border border-secondary text-secondary inline-block ml-1 px-2 text-sm rounded-xl;
+	}
+
+
+
+</style>
+
