@@ -53,7 +53,7 @@ const collection = getHowToSnippets(howTo)
 				<div class="samples">
 					{map(snippets, (snippet) => (
 						<div class="sample mb-2">
-							<Code lang="rust" code={snippet} />
+							<Code lang={lang} code={snippet} />
 						</div>
 					))}
 				</div>
