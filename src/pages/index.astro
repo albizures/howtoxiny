@@ -1,48 +1,48 @@
 ---
 
 import HowToCard from '../component/HowToCard.astro'
-import { getHowToDos } from '../content'
+import Navbar from '../component/Navbar.astro'
+import { getHowTo } from '../content'
 import Page from '../layout/Page.astro'
 
-const howTos = await getHowToDos()
+const howTos = await getHowTo()
 
 ---
 <Page>
-	<main
-		class="bg-base-100 max-w-xl mx-auto mt-20 px-4 flex flex-col justify-center align-middle"
-	>
-	<h1
-		class="text-5xl text-primary text-center font-serif font-bold mb-4 leading-relaxed"
-	>
-		How to do <br /><span class="box-letter border-secondary text-secondary">X</span>
-		in
-		<span class="box-letter border-accent text-accent">Y</span>
-	</h1>
-	<p class="text-center">
-		Small and straight to the point code snippet comparisons, inspired
-		by <a class="link link-secondary" href="https://learnxinyminutes.com">
-			Learn X in Y minutes
-		</a>
-	</p>
-	<h2 class="text-3xl text-center font-serif mt-6 text-primary">
-		List of Snippets
-	</h2>
-	<ul
-		class="list-none marker:text-secondary md:max-w-xs mx-auto mt-3"
-	>
-		{howTos.map((howTo) => {
-			return (
-				<li>
-					<HowToCard howToDo={howTo} />
-				</li>
-			)
-		})}
-	</ul>
+	<Navbar />
+	<header>
+		<h1 class="text-5xl mt-20 text-primary text-center font-serif font-bold leading-relaxed">
+			How to do <br /><span class="box-letter border-secondary text-secondary">X</span>
+			in
+			<span class="box-letter border-accent text-accent">Y</span>
+		</h1>
+		<p class="text-center max-w-md mx-auto mt-4">
+			Small and straight to the point code snippet comparisons, inspired
+			by <a class="link link-secondary" href="https://learnxinyminutes.com">
+				Learn X in Y minutes
+			</a>
+		</p>
+	</header>
+	<hr class="border-base-300 mt-4" />
+	<main class="bg-base-100 max-w-xl mx-auto px-4 flex flex-col justify-center align-middle">
+
+		<h2 class="text-3xl text-center font-serif mt-8 text-primary">
+			List of Snippets
+		</h2>
+		<ul class="list-none mx-auto mt-8 space-y-8">
+			{howTos.map((howTo) => {
+				return (
+					<li>
+						<HowToCard howTo={howTo} />
+					</li>
+				)
+			})}
+		</ul>
 </main>
 </Page>
 
 <style>
 	.box-letter {
-		@apply border inline-block px-2 leading-tight mx-1;
+		@apply border inline-block px-3 leading-tight mx-1 rounded;
 	}
 </style>

@@ -1,36 +1,49 @@
 ---
-import { getHowToSnippets, type HowToDo } from '../content'
+import { getHowToSnippets, type HowTo } from '../content'
 import { map } from '../map'
+import Tag from './Tag.astro'
 
 export type Props = {
-	howToDo: HowToDo
+	howTo: HowTo
 }
 
-const { howToDo } = Astro.props
-const { data, slug } = howToDo
+const { howTo } = Astro.props
+const { data, slug } = howTo
 const { title, description } = data
-const collection = getHowToSnippets(howToDo)
+const collection = getHowToSnippets(howTo)
 const href = `/how-to/${slug}`
 
 ---
-<div>
-	<h4>
-		<a href={href}>
+<div class="card">
+	<h4 class="text-2xl font-semibold font-serif">
+		<a class="link" href={href}>
 			{title}
 		</a>
 	</h4>
 	<p>
-		<a href={href}>
+		<a class="link" href={href}>
 			{description}
 		</a>
 	</p>
-	<ul class="list-none flex gap-4">
+	<ul class="list-none flex mt-1">
 		{map(collection, ([lang]) => {
 			return (
 				<li>
-					{lang}
+					<Tag type="accent">
+						{lang}
+					</Tag>
 				</li>
 			)
 		})}
 	</ul>
 </div>
+
+<style>
+	.link {
+		@apply no-underline decoration-wavy decoration-primary;
+	}
+
+	.card:hover .link {
+		@apply underline;
+	}
+</style>

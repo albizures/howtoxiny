@@ -1,33 +1,35 @@
 ---
 import { Code } from 'astro/components'
-import { getHowToDos, getHowToSnippets, type HowToDo } from '../../../content'
+import Navbar from '../../../component/Navbar.astro'
+import { getHowTo, getHowToSnippets, type HowTo } from '../../../content'
 import Page from '../../../layout/Page.astro'
 import { map } from '../../../map'
 
 export type Props = {
-	howToDo: HowToDo
+	howTo: HowTo
 }
 
 export async function getStaticPaths() {
-	const howToDos = await getHowToDos()
+	const howTos = await getHowTo()
 
-	return howToDos.map((howToDo) => {
-		const { slug } = howToDo
+	return howTos.map((howTo) => {
+		const { slug } = howTo
 		return {
 			params: { slug },
-			props: { howToDo },
+			props: { howTo },
 		}
 	})
 }
 
-const { howToDo } = Astro.props
-const { data } = howToDo
+const { howTo } = Astro.props
+const { data } = howTo
 const { title } = data
 
-const collection = getHowToSnippets(howToDo)
+const collection = getHowToSnippets(howTo)
 
 ---
 <Page>
+	<Navbar />
 	<div class="bg-base-200 p-4 pb-6">
 		<div class="max-w-xl mx-auto">
 			<h1>
